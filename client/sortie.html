@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Visite Formations Sortie</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            clifford: '#da373d',
+                        }
+                    }
+                }
+            }
+        </script>
+        <script src="https://unpkg.com/html5-qrcode"></script>
+        <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+        <script src="assets/scripts/sortie.js" defer></script>
+        <link rel="stylesheet" href="assets/style/style.css">
+    </head>
+    <body>
+
+        <header class="bg-gray-800 p-4">
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="index.html" class="text-white px-4 py-2 rounded-lg hover:bg-blue-500">Entrée</a>
+                    </li>
+                    <li><a href="sortie.html" class="text-white px-4 py-2 bg-blue-600 hover:bg-gray-700 rounded-lg">Sortie</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main class="mt-4 p-4">
+            <!-- Formulaire QR Code -->
+            <form id="qrCodeForm" class="mb-4">
+                <fieldset>
+                    <legend>Sortie<legend>
+
+                            <label for="cameraSelector">Camera choisie</label>
+                            <select name="cameraSelector" id="cameraSelector"></select>
+                            <fieldset>
+                                <button id="scanBtn" class="text-white px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-500">Scanner le code
+                                    QR</button>
+                            </fieldset>
+                            <div id="reader" class="max-w-xs"></div>
+                </fieldset>
+            </form>
+
+            <div class="p-6 bg-white border border-gray-200 rounded-lg shadow confirmationCard" id="confirmationCard">
+                <p>Sortie Enregistrée</p>
+                <button class="text-white px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-500"><a href="index.html">Valider</a></button>
+            </div>
+            <hr>
+
+        </main>
+
+
+    </body>
+</html>
