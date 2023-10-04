@@ -27,7 +27,6 @@ async function getVisitorId(formData) {
 	let response = await fetch(url);
 	let data = await response.json();
 	id = data.content[0].id_visiteur;
-	console.log("getVisitorId Function: ", data);
 	return id;
 }
 async function getSessionId(dateToday, id_formation) {
@@ -77,7 +76,7 @@ sendUserDataBtn.addEventListener("click", e => {
 });
 
 function showFormationList(route) {
-	chooseSessPers.innerHTML = "";
+	chooseSessPers.innerHTML = `<option value="0">-</option>`;
 	let url = `${root}${route}`;
 	fetch(url)
 		.then(response => {
@@ -149,7 +148,6 @@ async function getVisitId() {
 
 	let response = await fetch(url);
 	let data = await response.json();
-	console.log(data);
 	id = data.content[0].id_visite;
 	return id;
 }
@@ -184,7 +182,6 @@ sendVisitBtn.addEventListener("click", async e => {
 			cardData[key] = tempCardData[key];
 		}
 	}
-	console.log(cardData);
 	let ul = visitorCard.querySelector("ul");
 	for (const [key, value] of Object.entries(cardData)) {
 		let li = document.createElement("li");
@@ -192,7 +189,6 @@ sendVisitBtn.addEventListener("click", async e => {
 		ul.appendChild(li);
 	}
 	genQrCode("qrcode", JSON.stringify({ visitId, visitorId }), 320);
-	console.log(JSON.stringify({ visitId, visitorId }));
 
 	visitorCard.style.display = "block";
 });
@@ -257,8 +253,6 @@ function showConfirmationCard(data) {
 		let li = document.createElement("li");
 		li.innerHTML = `<b>${key}:</b> ${value}`;
 		ul.appendChild(li);
-		console.log(li);
-		console.log(ul);
 	}
 
 	confirmationCard.style.display = "block";
@@ -304,7 +298,7 @@ Html5Qrcode.getCameras()
 		}
 	})
 	.catch(e => {
-		console.log(e);
+		console.error(e);
 	});
 
 scanBtn.addEventListener("click", e => {
@@ -314,8 +308,6 @@ scanBtn.addEventListener("click", e => {
 
 	function onScanSuccess(decodedText, decodedResult) {
 		let jsonDecode = JSON.parse(decodedText);
-		console.log(jsonDecode);
-		console.log(`Code matched = ${decodedText}`, decodedResult);
 		getVisitorData(jsonDecode.visitorId);
 		html5QrCode.stop();
 	}
@@ -323,12 +315,11 @@ scanBtn.addEventListener("click", e => {
 	function onScanFailure(errorMessage) {
 		if (scanAttempts == 0) console.groupCollapsed("Scan Attempts");
 		scanAttempts++;
-		console.log(scanAttempts);
 		if (scanAttempts > 600) {
 			html5QrCode.stop();
 			console.groupEnd("Scan Attempts");
 		}
-		console.log(errorMessage);
+		console.error(errorMessage);
 	}
 
 	html5QrCode

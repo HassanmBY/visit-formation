@@ -15,7 +15,7 @@ if ($route == ""){
     die();
 }
 
-$allowedRoutes = ["client", "formations", "historique_visites", "personnel", "sessions", "stagiaires_sessions", "visiteurs", "visiteur_personnel_info", "visiteur_session_info"];
+$allowedRoutes = ["client", "formations", "historique_visites", "personnel", "sessions", "stagiaires_sessions", "visiteurs", "visiteur_personnel_info", "visiteur_session_info", "visite_details"];
 
 if (!in_array($route, $allowedRoutes)){
     $resp['message'] = "Bad Request";
